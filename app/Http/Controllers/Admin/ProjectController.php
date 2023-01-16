@@ -43,13 +43,17 @@ class ProjectController extends Controller
      */
     public function store(StoreProjectRequest $request)
     {
+
         
+
         $newProject = new Project();
         $newProject->title = $request["title"];
+        $newProject->category_id = $request["category_id"];
         $newProject->cover_image = Storage::disk('public')->put('projects_img', $request->cover);
         $newProject->author = $request["author"];
         $newProject->deadline = $request["deadline"];
         $newProject->save();
+  
         return to_route("projects.index");
         
     }
@@ -73,7 +77,11 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        return view("admin.projects.edit", ["project" => $project]);
+        $categories = Category::all();
+        return view("admin.projects.edit", [
+            "project" => $project,
+            "categories" => $categories
+        ]);
     }
 
     /**
@@ -91,6 +99,7 @@ class ProjectController extends Controller
             
             $data = [
                 'title' => $request['title'],
+                'category_id' => $request["category_id"],
                 'cover_image' => Storage::disk('public')->put('projects_img', $request->cover),
                 'author' => $request['author'],
                 'deaadline' => $request['deadline'],

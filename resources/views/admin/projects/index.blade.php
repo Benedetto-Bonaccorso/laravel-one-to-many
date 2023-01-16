@@ -9,6 +9,7 @@
                 <tr>
                     <th scope="col">id</th>
                     <th scope="col">title</th>
+                    <th scope="col">cathegory</th>
                     <th scope="col">cover image</th>
                     <th scope="col">author</th>
                     <th scope="col">deadline</th>
@@ -20,6 +21,7 @@
                     <tr>
                         <td scope="row">{{$project->id}}</td>
                         <td>{{$project->title}}</td>
+                        <td>{{$project->category_id}}</td>
                         <td><img src="{{asset('storage/' . $project->cover_image)}}" alt="{{$project->title}}"></td>
                         <td>{{$project->author}}</td>
                         <td>{{$project->deadline}}</td>
